@@ -1,0 +1,208 @@
+Question paper extracted text - 
+&)0 $4057)
+
+Roll No:
+
+ss Total No. of Printed Pages:
+Total No. of Questions: [09]
+
+BSc. (IT) (Semester - 4th) *
+» SYSTEM ANALYSIS AND DESIGN
+Subject Code: BITE1-418
+Paper ID: [130421]
+
+‘Time: 03 Hours 4 Maximum Marks: 60
+
+Instruction for candidates:
+
+1. Section A is compulsory. It consists of 10 parts of two marks each.
+
+2. Section B consist of 5 questions of $ marks cach. The student has to attempt any 4
+questions out of it.
+
+3. Section C consist of 3 questions of 10 marks each. The student has to attempt any 2
+questions
+
+Section — A 2 marks each)
+
+QI. Attempt the followin;
+af What do you mean by SDLC?
+by” What is the role of'a system analyst?
+©) Illustrate the significance of a user manual.
+4) List the various goals considered for input & output design?
+©) What is the purpose of testing? :
+{Define acceptance testing.s
+2) _ Explain post implementation maintenance.
+bY” Differentiate between system maintenance and enhancement.
+IY Distinguish bétween alpha and beta testing.
+AY Differentiate between system analysis and design.
+
+Section - B (S marks each)
+12. What do you mean by system? Explain various characteristics of a system.
+3. Define system design. Briefly explain the process and stages of system design.
+QA. How system testing is different from unit testing and\integration testing? Discuss.
+Q5._ Explain the primary activities involved in system maintenance procedure.
+Q6. What is the need of documentation? What is role of training manuals in documentation?
+
+Section -C (10 marks each)
+Q7. Discuss various information gathering and structured analysis tools,
+
+Q8. Explain various case study techniques in system design.
+
+Q9. Explain the following terms: y
+a) Regression testing Pa
+
+
+VOCE GYD, Total No. of Printed Pages: [01]
+09}
+
+Roll No..
+Total No. of Ques
+
+B.Sc.(IT) (Semester 4"
+. SYSTEM ANALYSIS & DESIGN
+SUBJECT CODE: BITE1-418
+Paper ID: {130421
+
+Time: 03 Hours Maximum Marks: 60
+Instruction for candidates:
+
+1. Section A is; Compulsory.
+
+2, Attempt any FOUR questions from Section B,
+
+3. Attempt any TWO questions from Section C.
+
+Seetion~ A (2 marks each)
+
+QI. a. ‘Define system.
+What are the various elements of a system?
+&~ Name some information gethering too!
+d- Name some media devices which are available for providing computer based output.
+2" Give an example of decision tree.
+4 What are the main characteristics of a Training manual?
+“& What is the need of system testing?
+‘Name few training aids used in implementation process.
+i. How do you create test files for testing new programs during implementation
+process?
+AC What are abstract systems?
+
+Section -B (Smarks each)
+Q2._ Write a detailed note on various types of system.
+GB. Describe in detail the role of a systems analyst.
+Q4: Discuss the various stages of System Desig.
+Q5. What is the significance of using testing Alpha and beta?
+Q6. Discuss the primary activities of system maintenance procedure.
+
+Section —C (40 marks each)
+uss in detail the functionality of each state of SDLC.
+Discuss the methodology used in performing Unit, System, Integration, acceptance and
+regression testing.
+‘What is significance of Post implementation maintenance? How is it carried? Discuss.
+
+
+Roll No... i98 Total No. of Printed Pages: 1
+
+Total No. of Questions: [09] ait
+by ornportar
+
+Branch: BSe.(IT) (Semester — 4th)
+‘Subject Name: System Analysis And Design
+Subject Code: BITEI418
+Paper ID: 130421
+
+Time: 03 Hours Maximum Marks: 60
+
+Instruction for candidates:
+
+1, Section A is compulsory. It consists of 10 parts of two marks each.
+
+2. Section B consist of 5 questions of $ marks each. The student has to attempt any 4
+questions out of it.
+
+3. Section C consist of 3 questions of 10 marks each. <The student has to attempt any 2
+questions. ‘
+
+Section— A (2 marks each)
+QI. Attempt the following:
+
+a. What is the difference between system analysis and system design?
+
+b.What is a system and its characteristics?
+
+©. Which testing is performed after the code is updated or changed?
+
+d.What.is documentation and why is it done?
+
+¢. What is the benefit of using structured analysis tools?
+
+f. What is acceptance testing?
+
+What is parallel run and why is it used?
+
+bh.What are the challenges in system maintenance?
+
+i. What is the difference between open-ended and close-ended questions?
+
+J. Wiuat is the difference between system documentaticn and user documentation?
+Section-B (5 marks each)
+Q2. Why the role of the system analyst is crucial? What chiufacteristics should system analysts,
+
+possess?
+Q3. What is input-output design and what are its objectives?
+Q4. Differentiate between the following:
+a). Unit testing and system testing.
+b) Alpha testing and beta testing.
+QS. What is a system maintenance and what are its types?
+Q6. What are various information-gathering tools? Which tool is most suitable to find day-to-
+day activities? - 3 oe
+
+Seetion—C (10 marks each)
+
+7. What is the importance of SDLC? Write in detail all its phases.
+
+Q8. What is system design? Discuss the tools used for the system design along with their
+advantages,
+
+Q9. What is the system implementation process? Explain various system implementation
+petorett oe)
+
+
+ + what to do with it - 
+Analyze the provided question paper text and perform the following tasks:
+
+1. Scan all question paper text to identify key topics.
+2. Evaluate topics based on:
+   a) Frequency of repetition across all question paper text
+   b) Estimated probability of appearing in the next exam
+   c) Overall importance based on repetition patterns
+
+3. For each significant topic identified:
+   - Determine the main subtopic of focus
+   - If the entire topic is important, label the subtopic as "whole"
+   - If only a specific aspect is emphasized (e.g., advantages, comparisons, like if the whole TCP is not necessary and just its advantages are asked more then mark subtopic as 'advantages'), note that specific subtopic
+
+4. Generate a JSON object with the following structure for each important topic:
+   {
+     "topic_name": {
+       "probability": "XX%",  # Estimated likelihood of appearance
+       "importance": "CATEGORY",  # VERYHIGH, HIGH, MEDIUM, LOW, or VERYLOW
+       "subtopic": "description",  # "whole" or specific subtopic, like phases or types or rather the whole topic 
+       "repeated": "number of times it was repeated",
+       "question_number": ["The questions related to that topic"]  # List of questions related to the topic
+     },
+     # ... (additional topics)
+   }
+
+Notes:
+- Focus on the most significant and frequently repeated topics.
+- Perform this analysis for all topics that are repeated more than once.
+- Base your analysis on clear patterns and repetitions observed in the provided question paper text.
+- The entire response should be in JSON object format.
+- If two different questions are from the same topic, increase that topic's repeatability count.
+- For subtopics, consider aspects like "importance, what it is, why it is used" if questions cover these areas.
+- Probability should be in percentage, times repeated should be an integer, importance should be in words (e.g., HIGH, VERY HIGH), and subtopic should be a string.
+- Include all related questions for each topic in the "question_number" field as full questions, not just numbers.
+- Provide realistic and varied probability percentages, not just multiples of 10.
+
+Please provide your analysis as a JSON object based on the question paper text provided.

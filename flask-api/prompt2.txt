@@ -1,0 +1,37 @@
+Analyze the provided question paper text and perform the following tasks:
+
+1. Scan all question paper text to identify key topics.
+2. Evaluate topics based on:
+   a) Frequency of repetition across all question paper text
+   b) Estimated probability of appearing in the next exam
+   c) Overall importance based on repetition patterns
+
+3. For each significant topic identified:
+   - Determine the main subtopic of focus
+   - If the entire topic is important, label the subtopic as "whole"
+   - If only a specific aspect is emphasized (e.g., advantages, comparisons, like if the whole TCP is not necessary and just its advantages are asked more then mark subtopic as 'advantages'), note that specific subtopic
+
+4. Generate a JSON object with the following structure for each important topic:
+   {
+     "topic_name": {
+       "probability": "XX%",  # Estimated likelihood of appearance
+       "importance": "CATEGORY",  # VERYHIGH, HIGH, MEDIUM, LOW, or VERYLOW
+       "subtopic": "description",  # "whole" or specific subtopic, like phases or types or rather the whole topic 
+       "repeated": "number of times it was repeated",
+       "question_number": ["The questions related to that topic"]  # List of questions related to the topic
+     },
+     # ... (additional topics)
+   }
+
+Notes:
+- Focus on the most significant and frequently repeated topics.
+- Perform this analysis for all topics that are repeated more than once.
+- Base your analysis on clear patterns and repetitions observed in the provided question paper text.
+- The entire response should be in JSON object format.
+- If two different questions are from the same topic, increase that topic's repeatability count.
+- For subtopics, consider aspects like "importance, what it is, why it is used" if questions cover these areas.
+- Probability should be in percentage, times repeated should be an integer, importance should be in words (e.g., HIGH, VERY HIGH), and subtopic should be a string.
+- Include all related questions for each topic in the "question_number" field as full questions, not just numbers.
+- Provide realistic and varied probability percentages, not just multiples of 10.
+
+Please provide your analysis as a JSON object based on the question paper text provided.

@@ -1,0 +1,43 @@
+Analyze the provided question paper images and perform the following tasks:
+
+1. Scan all question papers to identify key topics.
+2. Evaluate topics based on:
+   a) Frequency of repetition across all question papers
+   b) Estimated probability of appearing in the next exam
+   c) Overall importance based on repetition patterns
+
+3. For each significant topic identified:
+   - Determine the main subtopic of focus
+   - If the entire topic is important, label the subtopic as "whole"
+   - If only a specific aspect is emphasized (e.g., advantages, comparisons, like if the whole TCP is not necessary and just its advantages are asked more then mark subtopic as 'advantages'), note that specific subtopic
+
+4. Generate a json object with the following structure with each important topic:
+   {
+     "topic_name": {
+       "probability": "XX%",  # Estimated likelihood of appearance
+       "importance": "CATEGORY",  # VERYHIGH, HIGH, MEDIUM, LOW, or VERYLOW
+       "subtopic": "description",  # "whole" or specific subtopic, like phases or types or rather the whole topic 
+       "repeated":"number of times it was repeated",
+       "question_number":"The questions related to that topic" #for eg if the topic is system analysis then you need to list all te questons for system analysis that were repeated(even if they are not directly related and also remember that the number of question should match the 'repeated' times)
+     },
+     "topic_name": {
+       "probability": "XX%",  # Estimated likelihood of appearance
+       "importance": "CATEGORY",  # VERYHIGH, HIGH, MEDIUM, LOW, or VERYLOW
+       "subtopic": "description",  # "whole" or specific subtopic, like phases or types or rather the whole topic 
+       "repeated":"number of times it was repeated",
+       "question_number":"The questions related to that topic" #for eg if the topic is system analysis then you need to list all te questons for system analysis that were repeated(even if they are not directly related and also remember that the number of question should match the 'repeated' times)
+     } #and so on....
+   }
+
+
+
+Notes:
+- Focus on the most significant and frequently repeated topics.
+- You need to do these analysis for all the topics that are repeated more than once...(means calcutaling their probabilities, importance, repeatability, subtopic, questions related to that topic)
+- Base your analysis on clear patterns and repetitions observed in the provided question papers.
+- REMEMBER that the whole response should be in json object format and not a single string out of it..
+- RESPONSE SHOULD BE JUST IN JSON FORMAT PLEASE .....
+- remember that if there are two different question but are from the same topic then it will increase that topic's repeatability count, like if a question asks "why is documentation important" and other asks "What is documentation" it will increase the count for topic "documentation" also if any of the question is repeated more then the subtopics will be marked as "importance, what it is, why is it used"
+- remember that, the probability should be in percentage, the times repeated should be in integer, importance should be in words like high, very high, and subtopic should be a string like "advantages, difference with otehr topic, importance, uses, its applications and finally show the exact question that contained that topic, by exact question i mean the exact question not its serial number i mean the WHOLE QUESTOIN.... and do this for all questions, so all the questions that relate to that topic, and PLEASE try to keep the probability percentage legit rather then just (80,90,70,60,50) make it seem more legit and believable...!!"
+
+Please provide your analysis and the resulting json object based on the question paper images provided.
