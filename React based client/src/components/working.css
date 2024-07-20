@@ -1,0 +1,39 @@
+.main-div{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-heading{
+    padding-top: 50px;
+    font-size: 37px;
+    font-family: Arial;
+}
+
+.creators-main-div{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-image{
+    width: 250px;
+    /* border-style: solid; */
+    /* border-radius: 50%;/ */
+}
+
+.upload-div{
+    display: flex;
+    /* background-color: black; */
+}
+
+.upload-animation{
+    /* position: absolute; */
+    /* background-color: red; */
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+
+            
