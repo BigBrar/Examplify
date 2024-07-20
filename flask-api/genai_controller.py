@@ -37,6 +37,39 @@ def upload_to_genai(file_names):
     #     os.remove(file)
     return response_text
 
+def syllabus_analysis(file_names):
+    all_files = []
+    print("Uploading files to genai...")
+    for file in file_names:
+        sample_file = genai.upload_file(path=file, display_name="User input")
+        all_files.append(sample_file)
+        # genai.delete_file(name=sample_file)
+        # os.remove(file)
+    # file = genai.get_file(name=sample_file.name)
+    model = genai.GenerativeModel(model_name="models/gemini-1.5-pro")
+    print("Getting the prompt ready..")
+    all_files2 = all_files
+    with open('syllabus_prompt.txt','r')as file:
+        prompt = file.read()
+    all_files2.append(prompt)
+    # response = model.generate_content([sample_file, "Describe the image."])
+    print("Sending the prompt and mentioning the files..")
+    print("All files 2",all_files2)
+    response = model.generate_content(all_files2)
+    print("Converting response to dict...")
+    data = response.to_dict() #converts the response to dictionary python
+    # array = [{i: data[i]} for i in data]
+    # json_object = json.dumps(data)
+    # print("response text ",response.text)
+    response_text = data['candidates'][0]['content']['parts'][0]['text']
+    # print(all_files)
+    # for file in file_names:
+    #     print('removing files...')
+    #     os.remove(file)
+    return response_text
+
+
+
 def only_text(file_names):
     cwd = os.getcwd()
     all_prompt=''
@@ -64,6 +97,8 @@ def only_text(file_names):
     # for file in file_names:
     #     print('removing files...')
     #     os.remove(file)
+    for file in file_names:
+        os.remove(file)
     return response_text
 
 def ask_without_upload(files):

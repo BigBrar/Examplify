@@ -1,0 +1,35 @@
+Analyze the provided syllabus and perform the following tasks:
+
+1. Scan the syllabus to identify all important topics.
+
+2. For each important topic, evaluate:
+   a) Time required to study the topic
+   b) Importance on a scale of 1-10
+   c) Number of subtopics
+   d) Difficulty level on a scale of 1-10
+
+3. Generate a JSON object with the following structure for each important topic:
+
+{
+  "topic_name": {
+    "time": "estimated time to cover the topic",
+    "importance": "importance score (1-10)",
+    "subtopics": "number of subtopics",
+    "difficulty": "difficulty score (1-10)"
+  },
+  "another_topic_name": {
+    "time": "estimated time to cover the topic",
+    "importance": "importance score (1-10)",
+    "subtopics": "number of subtopics",
+    "difficulty": "difficulty score (1-10)"
+  }
+}
+
+Notes:
+- Provide time estimates in hours or days (e.g., "2 hours" or "3 days")
+- Importance and difficulty scores should be integers from 1 to 10
+- The number of subtopics should be an integer
+- Include all important topics from the syllabus in the JSON object
+- The output should be strictly in JSON format with no additional text
+
+Please analyze the provided syllabus and return the resulting JSON object based on these instructions.
