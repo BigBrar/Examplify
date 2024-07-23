@@ -35,19 +35,17 @@
     justify-content: center;
 }
 
-.choose-files{
-    /* background-color: black; */
-}
+
 
 .upload-button{
     margin: 10px;
-    margin-right: 80px ;
+    /* margin-right: 80px ; */
     margin-top: 20px;
     width: 150px;
     border: 1px;
     border-style: solid;
     background-color: transparent;
-    padding: 7px;
+    /* padding: 7px; */
     border-radius: 5px;
     transition: color 1s, background-color 0.5s;
 }
@@ -99,6 +97,23 @@
     font-size: 17px;
     white-space: nowrap;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.overlay-div{
+    position: fixed; /* Fixed position relative to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: transparent; /* Semi-transparent background color */
+    backdrop-filter:blur(5px);
+    z-index: 9999; /* Ensure it's above other content */
+    justify-content: center;
+    align-items: center;
+    /* transition: visibility 4s; */
+    display: flex;
+    opacity: 0;
+    transition: visibiity 0.4s, opacity 2s;
 }
 
 

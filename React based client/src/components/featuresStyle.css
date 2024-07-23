@@ -134,6 +134,10 @@
     .div-body{
         width: 100%;
     }
+    .properties-navbar{
+        justify-content: flex-start !important;
+        margin-left: 5px;
+    }
     .main-heading{
         padding-right: 0px;
         font-size: 13px !important;
@@ -148,14 +152,17 @@
     .main-nav{
         height: 36px !important;
     }
+    .second-nav-div{
+        justify-content: center !important;
+    }
     .second-nav-property{
         font-size: 10px;
-        display: none;
     }
     .third-div{
         margin-left: 0px !important;
         justify-content: flex-end !important;
         align-items: center;
+        padding-top: 3px;
     }
     .third-nav-property{
         font-size: 10px;
@@ -165,6 +172,7 @@
         width: 40px !important;
         padding-bottom: 3px;
         right: 0;
+
     }
     .properties-navbar{
         justify-content: flex-start;
