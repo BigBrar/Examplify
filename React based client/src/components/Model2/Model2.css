@@ -106,14 +106,13 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     background-color: transparent; /* Semi-transparent background color */
-    backdrop-filter:blur(5px);
+    backdrop-filter:blur(100px);
     z-index: 9999; /* Ensure it's above other content */
     justify-content: center;
     align-items: center;
     /* transition: visibility 4s; */
-    display: flex;
     opacity: 0;
-    transition: visibiity 0.4s, opacity 2s;
+    transition: visibiity 0.4s, opacity 0.8s;
 }
 
 
