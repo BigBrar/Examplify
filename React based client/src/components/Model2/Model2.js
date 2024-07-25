@@ -5,27 +5,14 @@ import { useNavigate } from 'react-router-dom'
 import Lottie from 'react-lottie-player'
 import animation from './animation2.json'
 import LoadingPage from './loadingPage'
+import LoadingBar from 'react-top-loading-bar'
 // import videoBg from './video.mp4'
 
 const Model2 = (props) => {
-    const changeStatusValue = ()=>{
-      while (!response){
-        setTimeout(() => {
-          setProgress('loading.')
-        }, "500");
-        setTimeout(() => {
-          setProgress('loading..')
-        }, "500");
-        setTimeout(() => {
-          setProgress('loading...')
-        }, "500");
-        console.log("Something is wrong...")
-      }
-    }
     const navigate = useNavigate()
-    const [progress,setProgress] = useState('loading...')
+    const [progress,setProgress] = useState(0)
     const [response,setResponse] = useState(null)
-    // const response = { "System Analysis": { "probability": "90%", "importance": "VERYHIGH", "subtopic": "Importance, What it is, Why it is used", "repeated": "4", "question_number": [ "What is the difference between system analysis and system design?", "Why is the role of the system analyst is crucial? What characteristics should system analysts possess?", "Discuss in detail the functionality of each state of SDLC.", "What is the importance of SDLC? Write in detail all its phases." ] }, "System Design": { "probability": "85%", "importance": "VERYHIGH", "subtopic": "Importance, What it is, Why it is used", "repeated": "3", "question_number": [ "What is the difference between system analysis and system design?", "Describe in detail the role of System Design.", "What is the importance of SDLC? Write in detail all its phases." ] }, "System Testing": { "probability": "75%", "importance": "HIGH", "subtopic": "Types, Importance, When it is used", "repeated": "3", "question_number": [ "What is testing and its characteristics?", "Differentiate between the following: Unit testing and system testing Alpha testing and Beta testing", "What are the main characteristics of a training manual?" ] }, "SDLC (Software Development Life Cycle)": { "probability": "70%", "importance": "HIGH", "subtopic": "Phases, Importance, Functionality of each phase", "repeated": "2", "question_number": [ "Discuss in detail the functionality of each state of SDLC.", "What is the importance of SDLC? Write in detail all its phases." ] }, "System Implementation": { "probability": "65%", "importance": "HIGH", "subtopic": "Process, Methods, Post-Implementation Maintenance", "repeated": "2", "question_number": [ "What is the significance of Post Implementation maintenance? How is it carried? Discuss.", "What is the system implementation process? Explain various system implementation methods." ] }, "Documentation": { "probability": "60%", "importance": "MEDIUM", "subtopic": "Importance, Types, Comparison between types", "repeated": "2", "question_number": [ "What is documentation and why is it done?", "What is the difference between open-ended and close-ended user documentation?" ] } }
+    
     const supported_extensions = ['.png','.jpg']
     const [animationvisible,setAnimationVisibility] = useState({
         visibility:'hidden',
@@ -35,6 +22,7 @@ const Model2 = (props) => {
     const uploadFile = async (e)=>{
         e.preventDefault()
         let files = e.target.file.files
+        setProgress(10)
         // console.log(file[0]['name'].endsWith(".png"))
         let formData = new FormData()
         for(let i=0; i<files.length; i++){
@@ -43,8 +31,10 @@ const Model2 = (props) => {
           if (!supported_extensions.includes(files[i]['name'].slice(-4))){
             alert("File extension not supported.")}
         }
+        setProgress(50)
         
     
+        setProgress(70)
         await fetch(`http://127.0.0.1:5000/${props.endpoint}`, {
         // await fetch(`http://127.0.0.1:5000/test`, {
           method: 'POST',
@@ -56,7 +46,7 @@ const Model2 = (props) => {
         display:'block'
        }))
        .then(document.body.style.overflow = 'hidden')
-      //  .then(changeStatusValue())
+       .then(setProgress(80))
        .then(resp => resp.json())
        .then(data => {
           if (data.errors) {
@@ -66,8 +56,10 @@ const Model2 = (props) => {
             console.log(data)
              setResponse(data)
              props.setResponse(data)
+             setProgress(95)
           }
        })
+       setProgress(100)
        console.log("Set response complete...")
        document.body.style.overflow = 'visible'
        await navigate('/result')
@@ -75,6 +67,7 @@ const Model2 = (props) => {
       }
   return (
     <div>
+      <LoadingBar color='#000000' height={4} progress={progress} shadow={true} onLoaderFinished={()=>setProgress(0)}/>
     <div className='overlay-div' style={{visibility:`${animationvisible.visibility}`, opacity:`${animationvisible.opacity}`}}>
       <LoadingPage status={progress} animation={animation}/>
         {/* <h2>Loading</h2> */}

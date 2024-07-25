@@ -1,23 +1,61 @@
 import React, { useEffect, useState } from 'react'
 import TopicDisplay from './TopicDisplay'
+import './FinalPage.css'
 
 const FinalPage = (props) => {
     const [articles,setArticles] = useState([])
+    const [highestProbability,sethighestProbability] = useState(null)
+
+    // const sortByProbability = (data)=> {
+    //   // Convert probability strings to numbers
+    //   for (let topic in data) {
+    //     let probability = parseFloat(data[topic].probability);
+    //     data[topic].probability = probability;
+    //   }
+    
+    //   // Sort the data based on probability
+    //   let sortedData = Object.entries(data).sort((a, b) => {
+    //     return b[1].probability - a[1].probability;
+    //   });
+    
+    //   // Convert the sorted data back to an object
+    //   let sortedObject = Object.fromEntries(sortedData);
+    //   // return sortedObject;
+    //   console.log(sortedObject)
+    //   console.log(response2)
+    //   // sortedObject = update_page(sortedObject)
+    //   // setArticles(sortedObject);
+    // }
+
+    // const sortByRepeated = (data)=> {
+    //   // Sort the data based on the 'repeated' property
+    //   let sortedData = Object.entries(data).sort((a, b) => {
+    //     let aRepeated = parseInt(a[1].repeated);
+    //     let bRepeated = parseInt(b[1].repeated);
+    //     return bRepeated - aRepeated;
+    //   });
+    
+    //   // Convert the sorted array back to an object
+    //   let sortedObject = Object.fromEntries(sortedData);
+    //   // return sortedObject;
+    //   setArticles(sortedObject);
+    // }
+
     const response = JSON.stringify(props.data,null,2)
     const response2 = props.data
     let array_response = []
 
-    const update_page = ()=>{
+    const update_page = (input)=>{
         const accumulatedObject = [];
-        for (let key in response2){
-            // console.log([{heading:key,probability:response2[key]['probability'],importance:response2[key]['importance'],subtopic:response2[key]['subtopic'],repeated:response2[key]['repeated'],question_number:response2[key]['question_number']}])
+        for (let key in input){
+            // console.log([{heading:key,probability:input[key]['probability'],importance:input[key]['importance'],subtopic:input[key]['subtopic'],repeated:input[key]['repeated'],question_number:input[key]['question_number']}])
             // console.log("Heading - ",key)
-            // console.log("Probability - ",response2[key]['probability'])
-            // console.log("importance - ",response2[key]['importance'])
-            // console.log("subtopic - ",response2[key]['subtopic'])
-            // console.log("repeated - ",response2[key]['repeated'])
-            // console.log("question_number - ",response2[key]['question_number'])
-            const simpleArray = [{heading:key,probability:response2[key]['probability'],importance:response2[key]['importance'],subtopic:response2[key]['subtopic'],repeated:response2[key]['repeated'],question_number:response2[key]['question_number']}]
+            // console.log("Probability - ",input[key]['probability'])
+            // console.log("importance - ",input[key]['importance'])
+            // console.log("subtopic - ",input[key]['subtopic'])
+            // console.log("repeated - ",input[key]['repeated'])
+            // console.log("question_number - ",input[key]['question_number'])
+            const simpleArray = [{heading:key,probability:input[key]['probability'],importance:input[key]['importance'],subtopic:input[key]['subtopic'],repeated:input[key]['repeated'],question_number:input[key]['question_number']}]
             // console.log("simple array ",simpleArray)
             accumulatedObject.push(simpleArray);
         }
@@ -27,7 +65,8 @@ const FinalPage = (props) => {
     }
 
     useEffect(()=>{
-       const result = update_page();
+
+       const result = update_page(response2);
        setArticles(result)
        console.log("Result",articles)
       },[])
@@ -36,14 +75,17 @@ const FinalPage = (props) => {
 
 
   return (
-    <div style={{paddingTop:'100px'}}>
-      {articles.map((element)=>{
-        return(
-        <div>
-            <TopicDisplay heading={element['heading']} element={element}/>
-        </div>)
-      })}
-    </div>
+    <>
+      <div className='main-div2' style={{paddingTop:'100px',position:'relative'}}>
+      
+        {articles.map((element)=>{
+          return(
+          <div>
+              <TopicDisplay heading={element['heading']} element={element}/>
+          </div>)
+        })}
+      </div>
+    </>
   )
 }
 

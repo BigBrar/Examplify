@@ -1,0 +1,103 @@
+body {
+    background-color: #333; /* Dark background for contrast */
+    color: #fff; /* Default text color */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.div-topic {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    flex: 1 1 calc(33% - 20px); /* Three items in a row */
+    max-width: calc(33% - 20px); /* Ensure max width */
+}
+
+.div-topic:hover {
+    transform: scale(1.02);
+}
+
+.topic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topic-name {
+    font-size: 20px;
+    color: #333; /* Dark color for visibility */
+}
+
+.importance-badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.importance-badge.veryhigh,
+.importance-badge.high {
+    background-color: #d9534f; /* Red for HIGH and VERY HIGH */
+}
+
+.importance-badge.medium {
+    background-color: #f0ad4e; /* Yellow for MEDIUM */
+}
+
+.importance-badge.other {
+    background-color: #5bc0de; /* Blue for anything else */
+}
+
+.probability-badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.probability-badge.high {
+    background-color: #d9534f; /* Red for high probability */
+}
+
+.probability-badge.medium {
+    background-color: #f0ad4e; /* Yellow for medium probability */
+}
+
+.probability-badge.low {
+    background-color: #5bc0de; /* Blue for low probability */
+}
+
+.topic-properties {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #555;
+}
+
+.property {
+    margin-bottom: 10px;
+}
+
+.question-list {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .div-topic {
+        flex: 1 1 100%; /* Stack items on smaller screens */
+        max-width: 100%; /* Full width on smaller screens */
+    }
+}

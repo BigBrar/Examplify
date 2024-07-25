@@ -38,12 +38,18 @@ const LoadingPage = (props) => {
     }}>
       <h1 style={{
         fontFamily: 'Arial, sans-serif',
-        fontSize: '48px',
+        textAlign:'center',
+        fontSize: '30px',
+        fontFamily:'Gill Sans MT',
+        // fontFamily:'Calibri',
+        // fontFamily: 'Trebuchet MS', 
+        // fontFamily: 'sans-serif',
         color: 'black',
         zIndex: 2,
         position: 'relative',
       }}>
         <Lottie loop play style={{ width: 500, height: 260 }} animationData={props.animation} />
+        Creating Response...
       </h1>
       {blobs.map((blob, index) => (
         <div

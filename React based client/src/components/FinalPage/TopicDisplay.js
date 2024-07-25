@@ -1,21 +1,48 @@
-import React from 'react'
+import React from 'react';
+import './FinalPage.css';
 
-const TopicDisplay=(props)=>{
-    console.log("props",props.element[0]['heading'])
-    return(
-    <div style={{color:'black', display:'grid',alignItems:'center',justifyContent:'center'}}>
-        <p className='topic-name' style={{fontSize:'30px', textAlign:'center'}}>{props.element[0]['heading']}</p>
-        <div style={{display:'grid',alignItems:'center',justifyContent:'center', textAlign:'center'}}>
-            <p>probability - {props.element[0]['probability']}</p>
-            <p>importance - {props.element[0]['importance']}</p>
-            <p>question_number - {props.element[0]['question_number']}</p>
-            <p>repeated - {props.element[0]['repeated']}</p>
-            <p>subtopic - {props.element[0]['subtopic']}</p>
-            
+const TopicDisplay = (props) => {
+    const { heading, probability, importance, question_number, repeated, subtopic } = props.element[0];
+
+    // Determine classes for probability
+    const probabilityClass = () => {
+        const probValue = parseFloat(probability);
+        if (probValue >= 80) {
+            return 'high';
+        } else if (probValue >= 60) {
+            return 'medium';
+        } else {
+            return 'low';
+        }
+    };
+
+    return (
+        <div className='div-topic'>
+            <div className='topic-header'>
+                <h2 className='topic-name'>{heading}</h2>
+                <span className={`importance-badge ${importance.toLowerCase()}`}>{importance}</span>
+            </div>
+            <div className='topic-properties'>
+                <div className='property'>
+                    <strong>Probability:</strong> <span className={`probability-badge ${probabilityClass()}`}>{probability}</span>
+                </div>
+                <div className='property'>
+                    <strong>Repeated:</strong> <span>{repeated}</span>
+                </div>
+                <div className='property'>
+                    <strong>Subtopic:</strong> <span>{subtopic}</span>
+                </div>
+                <div className='property'>
+                    <strong>Questions:</strong>
+                    <ul className='question-list'>
+                        {question_number.map((question, index) => (
+                            <li key={index}>{question}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </div>
-
-    </div>
-    )
-}
+    );
+};
 
 export default TopicDisplay;
