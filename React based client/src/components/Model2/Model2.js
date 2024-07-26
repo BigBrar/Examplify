@@ -3,17 +3,21 @@ import './Model2.css'
 import Heading_desc from '../HeadingDesc'
 import { useNavigate } from 'react-router-dom'
 import Lottie from 'react-lottie-player'
-import animation from './animation2.json'
+import penAnimation from './animation2.json'
+import successResponse from './successResponse.json'
 import LoadingPage from './loadingPage'
 import LoadingBar from 'react-top-loading-bar'
 // import videoBg from './video.mp4'
 
 const Model2 = (props) => {
+  const [animation,setAnimation] = useState(penAnimation)
+  const [loadingOpacity,setloadingOpacity] = useState(1)
+  const [loadingText,setloadingText] = useState("Generating Response...")
     const navigate = useNavigate()
     const [progress,setProgress] = useState(0)
     const [response,setResponse] = useState(null)
     
-    const supported_extensions = ['.png','.jpg']
+    const supported_extensions = ['.png','.jpg','.pdf']
     const [animationvisible,setAnimationVisibility] = useState({
         visibility:'hidden',
         opacity:0,
@@ -30,6 +34,10 @@ const Model2 = (props) => {
           formData.append('file',files[i])
           if (!supported_extensions.includes(files[i]['name'].slice(-4))){
             alert("File extension not supported.")}
+            // console.log(`/${props.currentModel}`)
+            // navigate(`/${props.currentModel}`)
+            window.location.reload();
+            await new Promise(resolve => setTimeout(resolve, 500));
         }
         setProgress(50)
         
@@ -57,19 +65,30 @@ const Model2 = (props) => {
              setResponse(data)
              props.setResponse(data)
              setProgress(95)
+            //  setloadingOpacity(0)
+             
+             
+             
           }
        })
+       setAnimation(successResponse)
+       await new Promise(resolve => setTimeout(resolve, 2000));
        setProgress(100)
        console.log("Set response complete...")
        document.body.style.overflow = 'visible'
-       await navigate('/result')
+       if (props.currentModel == 'model1'){
+         await navigate('/result/model1')
+       }
+       else if (props.currentModel == 'model2'){
+         await navigate('/result/model2')
+       }
        console.log("navigate complete.")
       }
   return (
     <div>
       <LoadingBar color='#000000' height={4} progress={progress} shadow={true} onLoaderFinished={()=>setProgress(0)}/>
     <div className='overlay-div' style={{visibility:`${animationvisible.visibility}`, opacity:`${animationvisible.opacity}`}}>
-      <LoadingPage status={progress} animation={animation}/>
+      <LoadingPage loadingText={loadingText} loadingOpacity={loadingOpacity} status={progress} animation={animation}/>
         {/* <h2>Loading</h2> */}
     </div>
     <div className='heading-div'>
@@ -80,7 +99,7 @@ const Model2 = (props) => {
     
     <form onSubmit={uploadFile} encType="multipart/form-data" className='main-form' action='http://127.0.0.1:5000' method='post'>
 
-      <input style={{marginLeft:'50px'}} className='choose-files' required accept=".jpg,.jpeg,.png"  name='file' type="file" multiple="multiple"></input>
+      <input style={{marginLeft:'50px'}} className='choose-files' required accept=".jpg,.jpeg,.png,.pdf"  name='file' type="file" multiple="multiple"></input>
 
       <div className='submit-button'>
       <button type='submit' className="upload-button">Upload File</button>
@@ -95,7 +114,7 @@ const Model2 = (props) => {
         <div></div>
       </div>
       <div className='supported-list'>
-        <p>* All image files (except webp)</p>
+        <p>* .jpeg, .png, .jpg, .pdf</p>
 
       </div>
     </div>

@@ -36,6 +36,7 @@ const LoadingPage = (props) => {
       overflow: 'hidden',
       position: 'relative',
     }}>
+      
       <h1 style={{
         fontFamily: 'Arial, sans-serif',
         textAlign:'center',
@@ -47,9 +48,23 @@ const LoadingPage = (props) => {
         color: 'black',
         zIndex: 2,
         position: 'relative',
+        opacity:`${prompt.loadingOpacity}`
       }}>
         <Lottie loop play style={{ width: 500, height: 260 }} animationData={props.animation} />
-        Creating Response...
+        <h1 style={{
+        fontFamily: 'Arial, sans-serif',
+        textAlign:'center',
+        fontSize: '30px',
+        fontFamily:'Gill Sans MT',
+        // fontFamily:'Calibri',
+        // fontFamily: 'Trebuchet MS', 
+        // fontFamily: 'sans-serif',
+        color: 'black',
+        zIndex: 2,
+        position: 'relative',
+        opacity:`${prompt.loadingOpacity}`,
+        transition:'opacity 1s'}}>{props.loadingText}
+        </h1>
       </h1>
       {blobs.map((blob, index) => (
         <div

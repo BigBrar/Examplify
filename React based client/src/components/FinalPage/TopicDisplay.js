@@ -20,7 +20,7 @@ const TopicDisplay = (props) => {
         <div className='div-topic'>
             <div className='topic-header'>
                 <h2 className='topic-name'>{heading}</h2>
-                <span className={`importance-badge ${importance.toLowerCase()}`}>{importance}</span>
+                <span className={`importance-badge ${importance.toLowerCase()}`}>Importance - <b>{importance}</b></span>
             </div>
             <div className='topic-properties'>
                 <div className='property'>
