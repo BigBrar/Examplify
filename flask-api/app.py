@@ -1,15 +1,18 @@
 from flask import Flask, request, render_template, redirect
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
 import json
 import uuid
 import os
 import time
 from genai_controller import upload_to_genai, ask_without_upload, only_text,syllabus_analysis
+from pdf_to_images import extract_images_pdf
 
 # UPLOAD_FOLDER = 'D:\\Gemini_hackathon_project\\flask-api\\image.png'
 UPLOAD_FOLDER = os.getcwd()
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
+CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 tasks = {}
@@ -22,19 +25,34 @@ def calculate_number(task_id):
         number+=1
 
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/model1',methods=['GET','POST'])
 def upload_file():
     if request.method =='POST':
         start_time = time.time()
+        print("Model1 selected...")
         # file = request.files['file']
         print("Collecting files from user...")
         files = request.files.getlist("file") 
+        if not files:
+            return 'please send atleast one'
         file_names = []
         print("Saving files on the server...")
         for file in files:
             filename = secure_filename(file.filename)
             file_names.append(filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            #extracting images from pdf file
+        for file in file_names:
+            if file.endswith('.pdf'):
+                if len(file_names) > 1:
+                    return "Only one pdf file is supported at a time"
+                else:
+                    extracted_images = extract_images_pdf(file)
+                    file_names = extracted_images
+                    break
+
+
         print('calling the genai_contactor...')
         # result = ask_without_upload(file_names)
         result = upload_to_genai(file_names)
@@ -47,10 +65,46 @@ def upload_file():
         end_time = time.time()
         execution_time = start_time - end_time  
         print("Execution time:",execution_time)
-        return render_template('output.html',data=data)
-        # return result
+        # return render_template('output.html',data=data)
+        
+        return data
     else:
         return 'YOU are right and wrong at the same time...'
+
+
+@app.route('/model2',methods=['GET','POST'])
+def model2():
+    if request.method =='POST':
+        start_time = time.time()
+        print("Model2 selected...")
+        # file = request.files['file']
+        print("Collecting files from user...")
+        files = request.files.getlist("file") 
+        if not files:
+            return files
+        file_names = []
+        print("Saving files on the server...")
+        for file in files:
+            filename = secure_filename(file.filename)
+            file_names.append(filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        print('calling the genai_contactor...')
+        # result = ask_without_upload(file_names)
+        result = syllabus_analysis(file_names)
+        end_time = time.time()
+        execution_time = start_time - end_time  
+        print("Execution time:",execution_time)
+        data = result.split('```json\n', 1)[-1].rsplit('\n```', 1)[0]
+        print(data)
+        return data
+    else:
+        return 'YOU are right and wrong at the same time...'
+    
+
+@app.route('/test',methods=['GET','POST'])
+def test_endpoint():
+    time.sleep(20)
+    return "there is nothing here..."
     
 @app.route('/createtest')
 def test_method():

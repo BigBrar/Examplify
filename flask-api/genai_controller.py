@@ -54,7 +54,7 @@ def syllabus_analysis(file_names):
     all_files2.append(prompt)
     # response = model.generate_content([sample_file, "Describe the image."])
     print("Sending the prompt and mentioning the files..")
-    print("All files 2",all_files2)
+    # print("All files 2",all_files2)
     response = model.generate_content(all_files2)
     print("Converting response to dict...")
     data = response.to_dict() #converts the response to dictionary python
