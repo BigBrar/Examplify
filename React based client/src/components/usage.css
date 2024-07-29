@@ -1,26 +1,28 @@
 .main-div{
-    padding-top: 50px;
+    /* padding-top: -30px; */
     display: grid;
     align-items: center;
     justify-content: center;
     color: black;
+    padding-bottom: 100px;
 }
 
 .heading-div{
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 60px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .para-div{
     padding-top: 20px;
     display: grid;
-    grid-template-columns: 0.8fr 1fr 0.8fr;
+    grid-template-columns: 0.6fr 1fr 0.6fr;
     justify-content: center;
     line-height: 35px;
     font-size: 20px;
-    text-align: justify;
+    text-align: center;
     /* style={{lineHeight:'35px',fontSize:'20px',textAlign:'justify'}} */
 }
 

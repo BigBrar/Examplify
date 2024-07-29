@@ -10,7 +10,7 @@ const Usage = () => {
             <div className='para-div'>
                 <div></div>
                 <div>
-                <p>To center the "About Us" and "Usage" section more effectively and reduce the space between them, you can adjust the styles for better alignment and spacing. Here is the revised code with the necessary adjustments:</p>
+                <p>To use our <b>Models</b>, simply upload the input file in either Image format (JPEG, JPG, PNG) or as a single PDf file conatining images. You can select multiple image files by pressing and holding the Ctrl key(on PC), but only one PDF file is supported at a time. Remember to read the usage instruction of the particular model you desire to use..</p>
 
                 </div>
                 <div></div>

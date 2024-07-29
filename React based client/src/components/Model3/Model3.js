@@ -1,21 +1,53 @@
 import React, { useState } from 'react'
-import './Model2.css'
+import './Model3.css'
 import Heading_desc from '../HeadingDesc'
 import { useNavigate } from 'react-router-dom'
-import Lottie from 'react-lottie-player'
 import penAnimation from './animation2.json'
 import successResponse from './successResponse.json'
 import LoadingPage from './loadingPage'
 import LoadingBar from 'react-top-loading-bar'
-// import videoBg from './video.mp4'
 
-const Model2 = (props) => {
+const Model3 = (props) => {
   const [animation,setAnimation] = useState(penAnimation)
   const [loadingOpacity,setloadingOpacity] = useState(1)
   const [loadingText,setloadingText] = useState("Generating Response...")
     const navigate = useNavigate()
     const [progress,setProgress] = useState(0)
     const [response,setResponse] = useState(null)
+    const [numberOfQuestions,setnumberOfQuestions] = useState(null)
+    const [buttonBackground1,setbuttonBackground1] = useState({
+        color:'black',
+        backgroundColor:'white'
+    })
+    const [buttonBackground2,setbuttonBackground2] = useState({
+        color:'black',
+        backgroundColor:'white'
+    })
+
+    const setQuestions = (clickedButton)=>{
+        if (clickedButton == 'button1'){
+            setbuttonBackground1({
+                color:'white',
+                backgroundColor:'black'
+            })
+            setbuttonBackground2({
+                color:'black',
+                backgroundColor:'white'
+            })
+            setnumberOfQuestions(20)
+        }
+        else if (clickedButton == 'button2'){
+            setbuttonBackground2({
+                color:'white',
+                backgroundColor:'black'
+            })
+            setbuttonBackground1({
+                color:'black',
+                backgroundColor:'white'
+            })
+            setnumberOfQuestions(50)
+        }
+    }
     
     const supported_extensions = ['.png','.jpg','.pdf']
     const [animationvisible,setAnimationVisibility] = useState({
@@ -24,14 +56,12 @@ const Model2 = (props) => {
         display:'block'
     })
     const uploadFile = async (e)=>{
-      console.log("upload function enetered")
         e.preventDefault()
         let files = e.target.file.files
         setProgress(10)
         // console.log(file[0]['name'].endsWith(".png"))
         let formData = new FormData()
         for(let i=0; i<files.length; i++){
-          console.log("for loop entered")
           console.log(files[i]['name'])
           formData.append('file',files[i])
           if (!supported_extensions.includes(files[i]['name'].slice(-4))){
@@ -39,8 +69,6 @@ const Model2 = (props) => {
             setProgress(0)
             return;
           }
-            // navigate('/')
-            
             // window.stop();
             // console.log(`/${props.currentModel}`)
             // navigate(`/${props.currentModel}`)
@@ -49,9 +77,9 @@ const Model2 = (props) => {
         }
         setProgress(50)
         
-        console.log("Calling the fetch function")
+        formData.append('numberOfQuestions',numberOfQuestions)
         setProgress(70)
-        await fetch(`http://127.0.0.1:5000/${props.endpoint}`, {
+        await fetch(`http://127.0.0.1:5000/model3`, {
         // await fetch(`http://127.0.0.1:5000/test`, {
           method: 'POST',
           body: formData
@@ -64,10 +92,12 @@ const Model2 = (props) => {
        .then(document.body.style.overflow = 'hidden')
        .then(setProgress(80))
        .then(resp => resp.json())
-       .then(console.log("fetch function running..."))
        .then(data => {
           if (data.errors) {
              alert(data.errors)
+          }
+          else if(data.hasOwnProperty('status')){
+            console.log("number of questions - ",data.numberOfQuestions)
           }
           else {
             console.log(data)
@@ -75,6 +105,7 @@ const Model2 = (props) => {
              props.setResponse(data)
              setProgress(95)
             //  setloadingOpacity(0)
+            return data
              
              
              
@@ -128,10 +159,24 @@ const Model2 = (props) => {
       </div>
     </div>
 
+
+    <div className='supported-formats'>
+        <div className='supported-heading'>
+            <div></div>
+                <b><p>Number of Questions</p></b>
+            <div></div>
+        </div>
+        <div className='number-of-questions'>
+            <button className='length-button-1' style={{borderRightColor:`${buttonBackground1.color === 'black'?'black':'white'}`, color:`${buttonBackground1.color}`,backgroundColor:`${buttonBackground1.backgroundColor}`}} onClick={()=>{setQuestions('button1')}}>20</button>
+            
+            <button className='length-button-2' style={{borderLeftColor:`${buttonBackground2.color === 'black'?'black':'white'}`,color:`${buttonBackground2.color}`,backgroundColor:`${buttonBackground2.backgroundColor}`}} onClick={()=>{setQuestions('button2')}}>50</button>
+        </div>
+    </div>
+
     <Heading_desc heading="Use case of this model" desc={props.desc}/>
     
   </div>
   )
 }
 
-export default Model2
+export default Model3

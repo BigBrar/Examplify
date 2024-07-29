@@ -4,9 +4,10 @@ import Working from './Working';
 import { Link } from 'react-router-dom';
 
 const Features = () => {
-    const para1 = 'To center the "About Us" and "Usage" section more effectively and reduce the space between them, you can adjust the styles for better alignment and spacing. Here is the revised code with the necessary adjustments:To center the "About Us" and "Usage" section more effectively and reduce the space between them, you can adjust the styles for better alignment and spacing. Here is the revised code with the necessary adjustment:'
+    const para1 = "Our Question Paper Analyzer is your data-driven companion. It analyzes your previous year question papers to identify recurring themes & patterns, revealing the most important topics for your next exam. The model calculates the probability of each topic appearing , allowing you to prioritize your study time and focus on what matters most. The more question papers you input, the more accurate and personalized your study plan becomes."
+    // const para1 = 'This model takes your previous year question papers as an input. It scans the inputted question papers and based on the repeatability of the topics it returns what topics are important, how many times a certain topic has been repeated, the probability of that topic to appear in future exams and other parameters. This model helps you determine the topics that are actually important for your next exam based on your previous exams. The more question papers you submit the better the output'
 
-    const para2 = 'fajflkajfTo center the "About Us" and "Usage" section more effectively and reduce the space between them, you can adjust the styles for better alignment and spacing. Here is the revised code with the necessary adjustments:To center the "About Us" and "Usage" section more effectively and reduce the space between them, you can adjust the styles for better alignment and spacing. Here is the revised code with the necessary :'
+    const para2 = 'The Syllabus Analyzer helps you conquer your syllabus, one topic at a time. It analyzes your subject syllabus, identifying key topics and providing insights like estimated study time, difficulty level, and crucial subtopics.  This allows you to create a personalized study plan, prioritize challenging areas, and allocate your time effectively for maximum learning.  Get ready to tackle your syllabus with confidence and efficiency!'
 
     const heading1 = 'Question Paper Analyser'
     const [heading2,setHeading] = useState('Syllabus analyser')
@@ -89,7 +90,7 @@ const Features = () => {
                         {state.heading}
                     </p></b>
                     <div>
-                        <p className='model-div-para' style={{ color: 'black', fontSize: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '10px', paddingRight: '40px', paddingLeft: '60px', paddingBottom: '50px', lineHeight: '40px', opacity: `${state.opacity1}`, transition: `${state.opacityP1}` }}>
+                        <p className='model-div-para' style={{ color: 'black', fontSize: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '10px', paddingRight: '40px', paddingLeft: '60px', paddingBottom: '50px', lineHeight: '40px', opacity: `${state.opacity1}`, transition: `${state.opacityP1}`, textAlign:'center' }}>
                             {state.para}</p>
                         <div className='div-next-button-small' style={{ cursor: 'pointer', opacity: `${state.opacity1}`, backgroundColor: 'black', transition: `${state.opacityP1}` }} >
                             <button className='div-button' style={{ color: 'black', cursor: 'pointer' }} onClick={() => { handleClick() }}>{'>'}</button>
