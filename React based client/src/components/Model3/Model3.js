@@ -14,7 +14,6 @@ const Model3 = (props) => {
     const navigate = useNavigate()
     const [progress,setProgress] = useState(0)
     const [response,setResponse] = useState(null)
-    const [numberOfQuestions,setnumberOfQuestions] = useState(null)
     const [buttonBackground1,setbuttonBackground1] = useState({
         color:'black',
         backgroundColor:'white'
@@ -25,7 +24,7 @@ const Model3 = (props) => {
     })
 
     const setQuestions = (clickedButton)=>{
-        if (clickedButton == 'button1'){
+        if (clickedButton === 'button1'){
             setbuttonBackground1({
                 color:'white',
                 backgroundColor:'black'
@@ -34,9 +33,9 @@ const Model3 = (props) => {
                 color:'black',
                 backgroundColor:'white'
             })
-            setnumberOfQuestions(20)
+            props.setnumberOfQuestions(20)
         }
-        else if (clickedButton == 'button2'){
+        else if (clickedButton === 'button2'){
             setbuttonBackground2({
                 color:'white',
                 backgroundColor:'black'
@@ -45,7 +44,7 @@ const Model3 = (props) => {
                 color:'black',
                 backgroundColor:'white'
             })
-            setnumberOfQuestions(50)
+            props.setnumberOfQuestions(50)
         }
     }
     
@@ -77,51 +76,54 @@ const Model3 = (props) => {
         }
         setProgress(50)
         
-        formData.append('numberOfQuestions',numberOfQuestions)
+        formData.append('numberOfQuestions',props.numberOfQuestions)
         setProgress(70)
-        await fetch(`http://127.0.0.1:5000/model3`, {
-        // await fetch(`http://127.0.0.1:5000/test`, {
-          method: 'POST',
-          body: formData
-       })
-       .then(setAnimationVisibility({
-        visibility:'visible',
-        opacity:1,
-        display:'block'
-       }))
-       .then(document.body.style.overflow = 'hidden')
-       .then(setProgress(80))
-       .then(resp => resp.json())
-       .then(data => {
-          if (data.errors) {
-             alert(data.errors)
-          }
-          else if(data.hasOwnProperty('status')){
-            console.log("number of questions - ",data.numberOfQuestions)
-          }
-          else {
-            console.log(data)
-             setResponse(data)
-             props.setResponse(data)
-             setProgress(95)
-            //  setloadingOpacity(0)
-            return data
+      //   await fetch(`http://127.0.0.1:5000/model3`, {
+      //   // await fetch(`http://127.0.0.1:5000/test`, {
+      //     method: 'POST',
+      //     body: formData
+      //  })
+      //  .then(setAnimationVisibility({
+      //   visibility:'visible',
+      //   opacity:1,
+      //   display:'block'
+      //  }))
+      //  .then(document.body.style.overflow = 'hidden')
+      //  .then(setProgress(80))
+      //  .then(resp => resp.json())
+      //  .then(data => {
+      //     if (data.errors) {
+      //        alert(data.errors)
+      //     }
+      //     else if(data.hasOwnProperty('status')){
+      //       console.log("number of questions - ",data.numberOfQuestions)
+      //     }
+      //     else {
+      //       console.log(data)
+      //        setResponse(data)
+      //        props.setResponse(data)
+      //        setProgress(95)
+      //       //  setloadingOpacity(0)
+      //       return data
              
              
              
-          }
-       })
+          // }
+      //  })
        setAnimation(successResponse)
        await new Promise(resolve => setTimeout(resolve, 2000));
        setProgress(100)
        console.log("Set response complete...")
        document.body.style.overflow = 'visible'
-       if (props.currentModel == 'model1'){
+       if (props.currentModel === 'model1'){
          await navigate('/result/model1')
        }
-       else if (props.currentModel == 'model2'){
+       else if (props.currentModel === 'model2'){
          await navigate('/result/model2')
        }
+       else if (props.currentModel === 'model3'){
+        await navigate('/result/model3')
+      }
        console.log("navigate complete.")
       }
   return (
