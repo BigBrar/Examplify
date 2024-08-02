@@ -4,6 +4,7 @@ import json
 from api_importer import get_api
 import PIL.Image
 from  textgeneration import extract_text_from_image
+from model3_prompt import get_model3_prompt
 
 genai.configure(api_key=get_api())
 
@@ -36,6 +37,41 @@ def upload_to_genai(file_names):
     #     print('removing files...')
     #     os.remove(file)
     return response_text
+
+
+def create_quiz(file_names,number_of_questions):
+    all_files = []
+    print("Uploading files to genai...")
+    for file in file_names:
+        sample_file = genai.upload_file(path=file, display_name="User input")
+        all_files.append(sample_file)
+        # genai.delete_file(name=sample_file)
+        # os.remove(file)
+    # file = genai.get_file(name=sample_file.name)
+    model = genai.GenerativeModel(model_name="models/gemini-1.5-pro")
+    print("Getting the prompt ready..")
+    all_files2 = all_files
+    
+    prompt = get_model3_prompt(number_of_questions)
+
+    all_files2.append(str(prompt))
+    # response = model.generate_content([sample_file, "Describe the image."])
+    print("Sending the prompt and mentioning the files..")
+    response = model.generate_content(all_files2)
+    print("Converting response to dict...")
+    try:
+        data = response.to_dict() #converts the response to dictionary python
+        # array = [{i: data[i]} for i in data]
+        # json_object = json.dumps(data)
+        # print("response text ",response.text)
+        response_text = data['candidates'][0]['content']['parts'][0]['text']
+        # print(all_files)
+        # for file in file_names:
+        #     print('removing files...')
+        #     os.remove(file)
+        return response_text
+    except:
+        print('something happened...')
 
 def syllabus_analysis(file_names):
     all_files = []

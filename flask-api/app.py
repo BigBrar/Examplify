@@ -5,7 +5,8 @@ import json
 import uuid
 import os
 import time
-from genai_controller import upload_to_genai, ask_without_upload, only_text,syllabus_analysis
+import tempfile
+from genai_controller import upload_to_genai, ask_without_upload, only_text,syllabus_analysis,create_quiz
 from pdf_to_images import extract_images_pdf
 
 # UPLOAD_FOLDER = 'D:\\Gemini_hackathon_project\\flask-api\\image.png'
@@ -70,6 +71,57 @@ def upload_file():
         return data
     else:
         return 'YOU are right and wrong at the same time...'
+    
+
+@app.route('/model3',methods=['GET','POST'])
+def method3():
+    if request.method =='POST':
+        start_time = time.time()
+        print("Model3 selected...")
+        # file = request.files['file']
+        print("Collecting files from user...")
+        files = request.files.getlist("file") 
+        number_of_questions = request.form['numberOfQuestions']
+        print('number of questions',number_of_questions)
+        # return {'status':'zero','numberOfQuestions':number_of_questions}
+        if not files:
+            return {'status':'no files found...'}
+        file_names = []
+        print("Saving files on the server...")
+        for file in files:
+            filename = secure_filename(file.filename)
+            file_names.append(filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            #extracting images from pdf file
+        for file in file_names:
+            if file.endswith('.pdf'):
+                if len(file_names) > 1:
+                    return "Only one pdf file is supported at a time"
+                else:
+                    extracted_images = extract_images_pdf(file)
+                    file_names = extracted_images
+                    break
+
+
+        print('calling the genai_contactor...')
+        # result = ask_without_upload(file_names)
+        result = create_quiz(file_names,number_of_questions)
+        print(result)
+
+        data = result.split('```json\n', 1)[-1].rsplit('\n```', 1)[0]
+        
+        data = json.loads(data)
+        
+        end_time = time.time()
+        execution_time = start_time - end_time  
+        print("Execution time:",execution_time)
+        # # return render_template('output.html',data=data)
+        
+        return data
+    else:
+        return {"Error":'404','status':'wrong method'}
+
 
 
 @app.route('/model2',methods=['GET','POST'])
