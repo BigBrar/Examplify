@@ -160,6 +160,10 @@ const TopicDisplay = (props) => {
                 <div style={{backgroundColor:`${background['option4']}`}} onClick={()=>checkAnswer('option4')} className='option'>{option4}</div>
             </div>
 
+            <div className='next-button-center-div'>
+            <button onClick={()=>nextQuestion()} className='next-button-center'>Next</button>
+            </div>
+
             <div className='answer-explanation'>
                 <div className='explanation-heading'>
                     {explanationHeading}

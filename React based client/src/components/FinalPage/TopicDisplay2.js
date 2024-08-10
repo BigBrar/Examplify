@@ -16,7 +16,7 @@ const TopicDisplay = (props) => {
             </div>
             <div className='topic-properties'>
                 <div className='property'>
-                    <strong>Subtopic:</strong> <span>{subtopic}</span>
+                    <strong>Important Topic:</strong> <span>{subtopic}</span>
                 </div>
                 <div className='property'>
                     <strong>Difficulty:</strong> <span>{difficulty}</span>

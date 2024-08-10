@@ -13,9 +13,16 @@
 .next-button{
     background-color: transparent;
     color: white;
-    border-color: transparent;
+    border-color: transparent !important;
     font-size: 60px;
+    transition: background-color 0.5s, color 1s !important;
 }
+
+.next-button:hover{
+    background-color: black !important;
+    color: white !important;
+}
+
 .main-heading{
     transition: border-color 0.5s;
     border-top: 1.5px;

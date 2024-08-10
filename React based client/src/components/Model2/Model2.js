@@ -7,6 +7,7 @@ import penAnimation from './animation2.json'
 import successResponse from './successResponse.json'
 import LoadingPage from './loadingPage'
 import LoadingBar from 'react-top-loading-bar'
+// import ExampleDoc from '......src/assets/files/exampleDoc.pdf'
 // import videoBg from './video.mp4'
 
 const Model2 = (props) => {
@@ -51,7 +52,9 @@ const Model2 = (props) => {
         
         console.log("Calling the fetch function")
         setProgress(70)
-        await fetch(`http://127.0.0.1:5000/${props.endpoint}`, {
+        
+        try{
+        await fetch(`https://backendgemini.pythonanywhere.com/${props.endpoint}`, {
         // await fetch(`http://127.0.0.1:5000/test`, {
           method: 'POST',
           body: formData
@@ -80,6 +83,10 @@ const Model2 = (props) => {
              
           }
        })
+      }catch{
+        await navigate('/error')
+        return ;
+      }
        setAnimation(successResponse)
        await new Promise(resolve => setTimeout(resolve, 2000));
        setProgress(100)
@@ -112,6 +119,7 @@ const Model2 = (props) => {
 
       <div className='submit-button'>
       <button type='submit' className="upload-button">Upload File</button>
+      {/* <a href={require("./testing.pdf")} download="myFile">click me please </a> */}
       </div>
       </form>
     </div>
@@ -124,6 +132,7 @@ const Model2 = (props) => {
       </div>
       <div className='supported-list'>
         <p>* .jpeg, .png, .jpg, .pdf</p>
+        <a style={{color:'black', textAlign:'center'}} href={require(`${props.sampleFilePath}`)} download={props.fileName}><p>need a file for testing? CLICK ME!! </p></a>
 
       </div>
     </div>

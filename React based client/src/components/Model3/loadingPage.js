@@ -6,6 +6,7 @@ const LoadingPage = (props) => {
   const [blobs, setBlobs] = useState([]);
 
   useEffect(() => {
+    console.log("loading page called...")
     const newBlobs = [];
     for (let i = 0; i < 15; i++) {
       newBlobs.push(createBlobData());

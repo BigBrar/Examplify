@@ -59,7 +59,7 @@ const FinalPage = (props) => {
               {heading:key,
                 time:input[key]['time'],
                 importance:input[key]['importance'],
-                subtopic:input[key]['subtopic'],
+                subtopic:input[key]['important_topic'],
                 difficulty:input[key]['difficulty']
               }
             ]

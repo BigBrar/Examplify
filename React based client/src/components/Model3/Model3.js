@@ -55,6 +55,10 @@ const Model3 = (props) => {
         display:'block'
     })
     const uploadFile = async (e)=>{
+      if (!props.numberOfQuestions){
+        alert("Please select number of questions ...")
+        return;
+      }
         e.preventDefault()
         let files = e.target.file.files
         setProgress(10)
@@ -78,38 +82,43 @@ const Model3 = (props) => {
         
         formData.append('numberOfQuestions',props.numberOfQuestions)
         setProgress(70)
-      //   await fetch(`http://127.0.0.1:5000/model3`, {
-      //   // await fetch(`http://127.0.0.1:5000/test`, {
-      //     method: 'POST',
-      //     body: formData
-      //  })
-      //  .then(setAnimationVisibility({
-      //   visibility:'visible',
-      //   opacity:1,
-      //   display:'block'
-      //  }))
-      //  .then(document.body.style.overflow = 'hidden')
-      //  .then(setProgress(80))
-      //  .then(resp => resp.json())
-      //  .then(data => {
-      //     if (data.errors) {
-      //        alert(data.errors)
-      //     }
-      //     else if(data.hasOwnProperty('status')){
-      //       console.log("number of questions - ",data.numberOfQuestions)
-      //     }
-      //     else {
-      //       console.log(data)
-      //        setResponse(data)
-      //        props.setResponse(data)
-      //        setProgress(95)
-      //       //  setloadingOpacity(0)
-      //       return data
+        try{
+        await fetch(`https://backendgemini.pythonanywhere.com/model3`, {
+        // await fetch(`http://127.0.0.1:5000/test`, {
+          method: 'POST',
+          body: formData
+       })
+       .then(setAnimationVisibility({
+        visibility:'visible',
+        opacity:1,
+        display:'block'
+       }))
+       .then(document.body.style.overflow = 'hidden')
+       .then(setProgress(80))
+       .then(resp => resp.json())
+       .then(data => {
+          if (data.errors) {
+             alert(data.errors)
+          }
+          else if(data.hasOwnProperty('status')){
+            console.log("number of questions - ",data.numberOfQuestions)
+          }
+          else {
+            console.log(data)
+             setResponse(data)
+             props.setResponse(data)
+             setProgress(95)
+            //  setloadingOpacity(0)
+            return data
              
              
              
-          // }
-      //  })
+          }
+       })
+      }catch{
+        await navigate('/error')
+        return ;
+       }
        setAnimation(successResponse)
        await new Promise(resolve => setTimeout(resolve, 2000));
        setProgress(100)
@@ -157,6 +166,7 @@ const Model3 = (props) => {
       </div>
       <div className='supported-list'>
         <p>* .jpeg, .png, .jpg, .pdf</p>
+        <a style={{color:'black', textAlign:'center'}} href={require(`${props.sampleFilePath}`)} download={props.fileName}><p>need a file for testing? CLICK ME!! </p></a>
 
       </div>
     </div>
