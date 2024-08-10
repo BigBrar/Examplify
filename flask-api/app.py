@@ -6,8 +6,8 @@ import uuid
 import os
 import time
 import tempfile
-from genai_controller import upload_to_genai, ask_without_upload, only_text,syllabus_analysis,create_quiz
-from pdf_to_images import extract_images_pdf
+from genai_controller import upload_to_genai, ask_without_upload, only_text,syllabus_analysis,create_quiz,syllabus_analysis2,create_quiz_pdf
+from pdf_to_images import extract_images_pdf, get_pdf_content
 
 # UPLOAD_FOLDER = 'D:\\Gemini_hackathon_project\\flask-api\\image.png'
 UPLOAD_FOLDER = os.getcwd()
@@ -94,19 +94,36 @@ def method3():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             #extracting images from pdf file
+        Endswith = False
         for file in file_names:
             if file.endswith('.pdf'):
+                Endswith = True
                 if len(file_names) > 1:
                     return "Only one pdf file is supported at a time"
                 else:
-                    extracted_images = extract_images_pdf(file)
-                    file_names = extracted_images
+                    response = get_pdf_content(file)
+                    if response['has_images']:
+                        # file_names = response['image_name_list']
+                        pass
+                    elif response['has_text']:
+                        file_text = response['all_text']
+                    elif response == 'NOT_SUPPORTED':
+                        return "pdf with both image and text is not supported (YET)"
+                    else:
+                        return "Unexpected file input or maybe something wrong with the file..."
+                    # extracted_images = extract_images_pdf(file)
+                    # file_names = extracted_images
                     break
 
 
         print('calling the genai_contactor...')
         # result = ask_without_upload(file_names)
-        result = create_quiz(file_names,number_of_questions)
+        result = ''
+        if Endswith:
+            result = create_quiz_pdf({"file_names":response['image_name_list'],"all_text":response['all_text']},number_of_questions)
+        else:
+            # return 
+            result = create_quiz(file_names,number_of_questions)
         print(result)
 
         data = result.split('```json\n', 1)[-1].rsplit('\n```', 1)[0]

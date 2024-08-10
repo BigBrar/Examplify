@@ -57,3 +57,32 @@ def extract_images_pdf(file_path):
     # os.remove(file_path)
     print("Image extraction from pdf DONE!!!")
     return image_name_list
+
+def get_pdf_content(file):
+    doc = fitz.open(file)
+    has_text = False
+    has_images = False
+    has_both=False
+    all_text = ''
+    for page in doc:
+        text = page.get_text()
+        if text.strip():
+            # print("The text of the page is - \n", text)
+            all_text+='\n'+str(text)
+            has_text = True
+            
+
+        images = page.get_images()
+        if images:
+            has_images = True
+            image_name_list = extract_images_pdf(file)
+    
+    if has_text and has_images:
+        return 'NOT_SUPPORTED'
+    elif has_text:
+        return {"all_text":all_text,"image_name_list":False,"has_images":has_images,"has_text":has_text,"has_both":has_both}
+    elif has_images:
+        return {"has_images":has_images,"has_text":has_text,"has_both":has_both,"image_name_list":image_name_list,"all_text":False}
+    else:
+        return "NOT_SUPPORTED"
+    # return {"has_text":has_text,"has_images": has_images, 'has_both': has_both}
