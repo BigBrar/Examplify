@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d7029a8e.css",
+    "main.js": "/static/js/main.b10664ea.js",
+    "static/js/453.c597e1e5.chunk.js": "/static/js/453.c597e1e5.chunk.js",
+    "static/media/sample_syllabus.png": "/static/media/sample_syllabus.d0be25595139bb469f47.png",
+    "static/media/sample_syllabus.pdf": "/static/media/sample_syllabus.ff6f9a6a20a8436eeace.pdf",
+    "static/media/question_papers.pdf": "/static/media/question_papers.0ab847d0c259ab6b6492.pdf",
+    "static/media/logo.png": "/static/media/logo.08ca565eac203e772675.png",
+    "index.html": "/index.html",
+    "main.d7029a8e.css.map": "/static/css/main.d7029a8e.css.map",
+    "main.b10664ea.js.map": "/static/js/main.b10664ea.js.map",
+    "453.c597e1e5.chunk.js.map": "/static/js/453.c597e1e5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d7029a8e.css",
+    "static/js/main.b10664ea.js"
+  ]
+}
