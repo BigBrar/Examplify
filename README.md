@@ -10,7 +10,7 @@ This project, built for the Gemini competition, leverages the power of React and
 
 ## Project Overview
 
-This web app presents three intuitive modals, each designed to streamline your study process and maximize exam success..
+This web app presents three intuitive modals, each designed to streamline your study process and maximize exam success.
 
 **Modals:**
 
