@@ -19,7 +19,7 @@ def upload_to_genai(file_names):
         # genai.delete_file(name=sample_file)
         # os.remove(file)
     # file = genai.get_file(name=sample_file.name)
-    model = genai.GenerativeModel(model_name="models/gemini-1.5-pro")
+    model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
     print("Getting the prompt ready..")
     all_files2 = all_files
     with open('prompt.txt','r')as file:
@@ -53,7 +53,7 @@ def create_quiz(file_names,number_of_questions):
         # genai.delete_file(name=sample_file)
         # os.remove(file)
     # file = genai.get_file(name=sample_file.name)
-    model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
+    model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
     print("Getting the prompt ready..")
     all_files2 = all_files
     
@@ -94,7 +94,7 @@ def create_quiz_pdf(response,number_of_questions):
             # genai.delete_file(name=sample_file)
             # os.remove(file)
         # file = genai.get_file(name=sample_file.name)
-        model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
+        model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
         print("Getting the prompt ready..")
         all_files2 = all_files
         
@@ -129,7 +129,7 @@ def create_quiz_pdf(response,number_of_questions):
         print('getting the prompt ready')
         prompt = get_model3_prompt(number_of_questions)
         prompt+='\n'+response['all_text']
-        model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
+        model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
         print("Sending the prompt and mentioning the files..")
         response = model.generate_content(prompt)
         try:
@@ -157,7 +157,7 @@ def syllabus_analysis(file_names):
     for file in file_names:
         sample_file = genai.upload_file(path=file, display_name="User input")
         all_files.append(sample_file)
-    model = genai.GenerativeModel(model_name="models/gemini-1.5-pro")
+    model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
     print("Getting the prompt ready..")
     all_files2 = all_files
     with open('syllabus_prompt.txt','r')as file:
@@ -189,7 +189,7 @@ def syllabus_analysis2(file_names,number_of_questions):
         # file_array.append(pathlib.Path(file).read_bytes())
         # all_files.append(sample_file)
     
-    model = genai.GenerativeModel(model_name="models/gemini-1.5-pro")
+    model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
     print("Getting the prompt ready..")
     # all_files2 = all_files
     # with open('syllabus_prompt.txt','r')as file:
@@ -222,7 +222,7 @@ def only_text(file_names,number_of_questions):
         # genai.delete_file(name=sample_file)
         # os.remove(file)
     # file = genai.get_file(name=sample_file.name)
-    model = genai.GenerativeModel(model_name="models/gemini-1.5-pro")
+    model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
     # with open('prompt2.txt','r')as file:
     #     prompt = file.read()
     prompt = get_model3_prompt(number_of_questions)
@@ -249,7 +249,7 @@ def ask_without_upload(files):
         img = PIL.Image.open(file)
         file_array.append(img)
     
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.5-flash')
     response = model.generate_content(file_array,stream=True)
     response.resolve()
     return response.text
